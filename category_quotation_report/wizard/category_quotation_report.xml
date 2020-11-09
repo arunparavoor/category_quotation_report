@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<record id="view_category_quotation_report_form" model="ir.ui.view">
+            <field name="name">Category Quotation Report</field>
+            <field name="model">category.quotation.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export Product Category Wise Vendor Quotation" >
+                    <p class="oe_gray">
+                            Retrieve and Export Product Category Wise Vendor Quotation based on filters.
+                    </p>                
+                    <group>
+						<group>
+                            <!-- <field name="location_id"/> -->
+                            <field name="categ_ids" widget="many2many_tags"/>
+							<field name="from_date"/>		
+							<field name="to_date"/>			
+						</group>
+                    </group>                   
+                    <footer>
+                        <button name="genarate_excel_report" string="Proceed" type="object" class="oe_highlight"/>
+                        or 
+                        <button special="cancel" string="Cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_category_quotation_report" model="ir.actions.act_window">
+            <field name="name">Category Quotation Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">category.quotation.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="category_report_excel_views" model="ir.ui.view">
+            <field name="name">category.report.out</field>
+            <field name="model">category.report.out</field>
+            <field name="arch" type="xml">
+                <form string="Download Category Wise Vendor Quotation">
+                    <group>
+                        <field name="file_data" filename="file_name" />
+                        <field name="file_name" invisible="1" />                        
+                    </group>
+                    <footer>
+                        <button string="Cancel" class="btn-primary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>	
+
+		<menuitem 
+            name = "Category Quotation Report"
+            action="action_category_quotation_report"
+            id="menu_action_category_quotation_report_wizard"
+            parent="purchase.purchase_report" groups ="base.group_user"
+            />
+            
+        
+      
+            
+	
+	</data>
+</odoo>
